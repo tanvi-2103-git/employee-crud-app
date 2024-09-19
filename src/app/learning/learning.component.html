@@ -1,0 +1,260 @@
+<h1>{{slogan}}</h1>
+<article>
+    <div>
+    <h4>
+        {{bindingImage.name}}
+    </h4>
+    <img [src]="bindingImage.url" [alt]="bindingImage.name" [height]="bindingImage.height" [width]="bindingImage.width">    
+    <p>1-way daa binding</p>
+    <p>{{companyName | uppercase}}</p>
+    <p>{{baseLocation}}</p>
+</div>
+<div>
+    <h3 [ngStyle]="{backgroundColor:'lightblue', color:'red'}">2-way data binding</h3>
+    <label for="location">Base Location :</label>
+    <input type="text" [(ngModel)]="baseLocation" id="location" (keyup)="display()"/>
+</div>
+<div>
+    <h3 [ngStyle]="styleObject" (mouseleave)="changeStyle2()" (mouseover)="changeStyle()">Event Binding</h3>
+    <input type="checkbox" [(ngModel)]="checkStatus" id="showP"  (change)="display()"/>
+    <label for="showP">Show Password</label>
+    <b>{{checkStatus}}</b>
+</div>
+<div #attrbind (mouseover)="access(attrbind)">
+    <h3 >Attribute Binding</h3>
+    <label for="Password">Enter Password :</label>
+    <input [type]="inputType"  id="Password" />
+</div>
+<div>
+    <h5 [ngClass]="['bg-info', 'text-success']">Template Reference Variables</h5>
+    <label>Enter company code:</label>
+    <input type="text" #code title="code">
+    <button type="button" (click)="setCode(code)">SEND</button>
+</div>
+</article>
+<article>
+    <h3 [ngClass]="styleClasses">Structural Directives</h3>
+    <div>
+        <h4 [ngClass]="styleClassObject">*ngIf</h4>
+        <div>
+            <label for="location">Base Location :</label>
+            <input  type="text" [(ngModel)]="baseLocation" title="location" list="bl" />
+        </div>
+        <datalist id="bl">
+            <option value="Dadar">DADAR</option>
+            <option value="Rabale">RABALE</option>
+            <option value="Parel">PAREL</option>
+        </datalist>
+        <address *ngIf="baseLocation.toLowerCase()=='rabale'">
+            <p>
+                Sigma IT Park, Unit No. 501, TTC Industrial Area, Rabale, Navi Mumbai, Maharashtra 400701
+            </p>
+        </address>
+        <address *ngIf="baseLocation.toLowerCase()=='dadar'">
+            <p>
+                dadar location address
+            </p>
+        </address>
+        <address *ngIf="baseLocation.toLowerCase()=='parel'">
+            <p>
+                parel location address
+            </p>
+        </address>
+    </div>
+    <div>
+        <h4 [ngClass]="{
+            'bg-info':true,
+            'text-success':true, 
+            'border':true, 
+            'border-3':false,
+            'border-dark':true
+          }">*ngIf-else</h4>
+        <div>
+            <label for="location">Base Location :</label>
+            <input  type="text" [(ngModel)]="baseLocation" title="location" list="bl" />
+        </div>
+        <datalist id="bl">
+            <option value="Dadar">DADAR</option>
+            <option value="Rabale">RABALE</option>
+            <option value="Parel">PAREL</option>
+        </datalist>
+        <address *ngIf="baseLocation.toLowerCase()=='rabale'; else elsepart1">
+            <p>
+                Sigma IT Park, Unit No. 501, TTC Industrial Area, Rabale, Navi Mumbai, Maharashtra 400701
+            </p>
+        </address>
+        <ng-template #elsepart1>
+            <address *ngIf="baseLocation.toLowerCase()=='dadar'; else elsepart2">
+                <p>
+                    dadar location address
+                </p>
+            </address>
+            <ng-template #elsepart2>
+                <address>
+                    <p>
+                        parel location address
+                    </p>
+                </address>
+            </ng-template>
+        </ng-template>
+    </div>
+    <div>
+        <h4>*ngIf-then-else</h4>
+        <div>
+            <label for="location">Base Location :</label>
+            <input  type="text" [(ngModel)]="baseLocation" title="location" list="bl" />
+        </div>
+        <datalist id="bl">
+            <option value="Dadar">DADAR</option>
+            <option value="Rabale">RABALE</option>
+            <option value="Parel">PAREL</option>
+        </datalist>
+        <ng-template *ngIf="baseLocation.toLowerCase()=='rabale' then thenblock1; else elseblock1"></ng-template>
+        <ng-template #thenblock1>
+            <!-- it always check every case in switch case -->
+             <!-- if more than 1 switch cases are there then also we can execute it and it will execute all of them ans show all results  -->
+            <address>
+                <p>
+                    Sigma IT Park, Unit No. 501, TTC Industrial Area, Rabale, Navi Mumbai, Maharashtra 400701
+                </p>
+            </address>
+        </ng-template>
+        <ng-template #elseblock1>
+           <ng-template *ngIf="baseLocation.toLowerCase()=='dadar' then thenblock2; else elseblock2"></ng-template>
+           <ng-template #thenblock2>
+                    <p>
+                        dadar location address
+                    </p>
+           </ng-template>
+        </ng-template>
+        <ng-template #elseblock2>
+            <address>
+                <p>
+                    parel location address
+                </p>
+            </address>
+        </ng-template>
+    </div>
+
+    <div>
+        <h4>*ngSwitch example</h4>
+        <div>
+            <label for="location">Base Location :</label>
+            <input type="text" [(ngModel)]="baseLocation" title="location" list="bl" />
+        </div>
+        <datalist id="bl">
+            <option value="Dadar">DADAR</option>
+            <option value="Rabale">RABALE</option>
+            <option value="Parel">PAREL</option>
+        </datalist>
+    
+        <div [ngSwitch]="baseLocation.toLowerCase()">
+            <ng-container *ngSwitchCase="'rabale'">
+                <address>
+                    <p>
+                        Sigma IT Park, Unit No. 501, TTC Industrial Area, Rabale, Navi Mumbai, Maharashtra 400701
+                    </p>
+                </address>
+            </ng-container>
+    
+            <ng-container *ngSwitchCase="'dadar'">
+                <p>
+                    Dadar location address
+                </p>
+            </ng-container>
+    
+            <ng-container *ngSwitchCase="'parel'">
+                <address>
+                    <p>
+                        Parel location address
+                    </p>
+                </address>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+                <address>
+                    <p>
+                       No address found
+                    </p>
+                </address>
+            </ng-container>
+        </div>
+    </div> 
+    <div>
+        <h3>
+            *ngFor
+        </h3>
+        <ol>
+            <li *ngFor="let companyOffices of companyOffices">{{companyOffices | lowercase}}</li>
+        </ol>
+        <table class="table table-bordered">
+            <thead><tr><th>Index</th>
+            <th>Location</th></tr></thead>
+            <tr *ngFor="let loc of companyOffices; let i=index; let even=even; let odd=odd">
+                <td>{{i}}</td>
+                <td>{{loc  }}</td>
+                <td>{{loc | slice:0:1 | uppercase }}</td>
+                <td>{{even}}</td>
+                <td>{{odd}}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <thead><tr><th>Index</th>
+            <th>Location</th></tr></thead>
+            <tr *ngFor="let loc of companyOffices; let i=index; let even=even; " >
+                <ng-container *ngIf="even">
+                <td>{{i}}</td>
+                <td>{{loc}}</td>
+                </ng-container>
+            </tr>
+        </table>
+    </div>
+    <section class="d-flex flex-wrap justify-content-between">
+        <div *ngFor="let office of offices" class="border border-2 dimensions">
+            <h4>{{office.location}}</h4>
+            <address>
+                <p>{{office.address}}</p>
+            </address>
+        </div>
+    </section>
+    <app-decorator (emitter)="slogan=$event"></app-decorator>
+</article>
+<article>
+    <h3>Pipes</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>salary</th>
+                <th colspan="5">Number pipe</th>
+                <th colspan="4">Currency pipe</th>
+                <select title="currencyCode" [(ngModel)]="currencyCode">
+                    <option *ngFor="let currency of currencyCodes" [value]="currency.code">{{currency.country}}</option>
+                </select>
+            
+
+            </tr>
+        </thead>
+        <tr *ngFor="let salary of salaries">
+            <td>{{salary}}</td>
+            <td>{{salary | number}}</td>
+            <td>{{salary | number:'.2'}}</td>
+            <td>{{salary | number:'.1-1'}}</td>
+            <td>{{salary | number:'.0-0'}}</td>
+            <td>{{salary | number:'10.1-2'}}</td>
+            <td>{{salary | currency}}</td>
+            <td>{{salary | currency :currencyCode}}</td> <!-- INR, EUR--> 
+            <td>{{salary | currency :currencyCode:'code'}}</td> 
+            <td>{{salary | currency :currencyCode:'symbol':'.3-3'}}</td>
+        </tr>
+   
+</table>
+<table>
+    <tr><td>{{today}}</td></tr>
+    <tr><td>{{today | date}}</td></tr>
+    <tr><td>{{today | date:'shortDate'}}</td></tr>
+    <tr><td>{{today | date :'fullTime'}}</td></tr>
+    <tr><td>{{today | date :'long'}}</td></tr> 
+    <tr><td>{{today | date : 'EEEEE, dd-MMMMM-yyyy'}}</td></tr>
+</table>
+
+</article>

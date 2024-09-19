@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.heading{
+    text-align: center;
+    text-shadow: 5px 5px 5px;
+}
+.app{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

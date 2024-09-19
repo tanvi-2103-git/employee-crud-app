@@ -1,0 +1,47 @@
+<article>
+    <section>
+
+        <h5>Counter from Service</h5>
+
+        <p>{{counter3}}</p>
+        <button (click)="increment()">increment</button>
+
+    </section>
+    <h3>Pipes</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>salary</th>
+                <th colspan="5">Number pipe</th>
+                <th colspan="4">Currency pipe</th>
+                <select title="currencyCode" [(ngModel)]="currencyCode">
+                    <option *ngFor="let currency of currencyCodes" [value]="currency.code">{{currency.country}}</option>
+                </select>
+            
+
+            </tr>
+        </thead>
+        <tr *ngFor="let salary of salaries">
+            <td>{{salary}}</td>
+            <td>{{salary | number}}</td>
+            <td>{{salary | number:'.2'}}</td>
+            <td>{{salary | number:'.1-1'}}</td>
+            <td>{{salary | number:'.0-0'}}</td>
+            <td>{{salary | number:'10.1-2'}}</td>
+            <td>{{salary | currency}}</td>
+            <td>{{salary | currency :currencyCode}}</td> <!-- INR, EUR--> 
+            <td>{{salary | currency :currencyCode:'code'}}</td> 
+            <td>{{salary | currency :currencyCode:'symbol':'.3-3'}}</td>
+        </tr>
+   
+</table>
+<table>
+    <tr><td>{{today}}</td></tr>
+    <tr><td>{{today | date}}</td></tr>
+    <tr><td>{{today | date:'shortDate'}}</td></tr>
+    <tr><td>{{today | date :'fullTime'}}</td></tr>
+    <tr><td>{{today | date :'long'}}</td></tr> 
+    <tr><td>{{today | date : 'EEEEE, dd-MMMMM-yyyy'}}</td></tr>
+</table>
+
+</article>

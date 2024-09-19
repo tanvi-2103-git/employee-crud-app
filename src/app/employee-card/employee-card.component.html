@@ -1,0 +1,26 @@
+<div class="row  p-2  " [ngStyle]="{'background-color': cardColor}">
+            
+    <div class="col-4">
+
+    <figure>
+        <figcaption><h6>#{{employee._id}}</h6>{{employee.emp_name}}</figcaption>
+        
+        <img src="https://img.freepik.com/free-photo/portrait-happy-manager-holding-leather-case_1262-5329.jpg" alt="employee" class="w-100 h-100 rounded">
+        <button type="button" class="btn btn-primary">EDIT</button>
+
+
+    </figure></div>
+    <div class="col-8">
+    <p>{{employee.emp_name}} joined on <span>{{employee.emp_joiningDate}}</span></p>
+    <ol class="list-group ">
+        <li class="list-group-item"><small>Email Id:</small><b>{{employee.emp_email}}</b></li>
+        <li class="list-group-item"><small>Salary:</small><b>{{employee.emp_salary}}</b></li>
+        <li class="list-group-item"><small>Experience:</small><b>{{employee.emp_experience}}</b></li>
+        <li class="list-group-item"><small>Department:</small><b>{{employee.emp_deptCode}}</b></li>
+
+    </ol>
+    <div>
+        <button type="button" class="btn btn-info m-2" [routerLink]="['/editemployee',employee._id]">EDIT</button>
+        <button type="button" class="btn btn-danger">DELETE</button>
+    </div>
+</div></div>

@@ -1,0 +1,21 @@
+<!-- <article>
+    <div>
+        <input type="color" [(ngModel)]="cardColor" title="color">
+    </div>
+    <div class="row">
+    <div *ngFor="let employee of employees"  class="col-sm-6  border border-5 ">
+       <app-employee-card [employee]="employee" [cardColor]="cardColor"></app-employee-card>
+    </div>
+</div>
+</article> -->
+<article>
+    <div>
+      <input type="color" [(ngModel)]="cardColor" title="color">
+    </div>
+    <div class="row">
+      <div *ngFor="let employee of employees" class="col-sm-6 border border-5">
+        <app-employee-card [employee]="employee" [cardColor]="cardColor"></app-employee-card>
+      </div>
+    </div>
+  </article>
+  
